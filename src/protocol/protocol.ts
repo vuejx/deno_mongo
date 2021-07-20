@@ -100,21 +100,6 @@ export class WireProtocol {
     if (this.#isPendingResponse) return;
     this.#isPendingResponse = true;
     while (this.#pendingResponses.size > 0) {
-      try {
-        const headerBuffer = await this.#reader.readFull(new Uint8Array(16));
-        assert(headerBuffer);
-        const header = parseHeader(headerBuffer!);
-        const bodyBuffer = await this.#reader.readFull(
-          new Uint8Array(header.messageLength - 16),
-        );
-        assert(bodyBuffer);
-        const reply = deserializeMessage(header, bodyBuffer!);
-        const pendingMessage = this.#pendingResponses.get(header.responseTo);
-        this.#pendingResponses.delete(header.responseTo);
-        pendingMessage?.resolve(reply);
-      } catch(error) {
-        console.log('errorerrorerror', error);
-      }
     }
     this.#isPendingResponse = false;
   }
