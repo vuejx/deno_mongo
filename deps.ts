@@ -11,4 +11,4 @@ export * as b64 from "https://deno.land/std@0.99.0/encoding/base64.ts";
 export {
   assert,
   assertEquals,
-} from "https://deno.land/std@0.99.0/testing/asserts.ts";
+} from "https://raw.githubusercontent.com/binhthvuejx/std/master/std/testing/asserts.ts";
